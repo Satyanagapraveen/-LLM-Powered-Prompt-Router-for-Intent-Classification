@@ -1,6 +1,7 @@
 from google import genai 
 import os
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 api_key=os.getenv("GEMINI_API_KEY")
@@ -43,5 +44,13 @@ def classify_intent(message:str):
         model="gemini-2.5-flash",
         contents=prompt
     )
-    print(response.text)
-    return response.text
+    raw_text=response.text.strip()
+    try:
+        cleaned=raw_text.replace("```json","").replace("```","")
+        result=json.loads(cleaned)
+        return result
+    except Exception:
+        return{
+            "intent":"Unclear",
+            "confidence":"0.0"
+        }
