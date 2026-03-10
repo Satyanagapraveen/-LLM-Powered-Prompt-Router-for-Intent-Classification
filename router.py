@@ -1,5 +1,6 @@
 from prompts import PROMPTS
 from classifier import client
+from logger import log_route
 
 def route_and_respond(message:str,intent_data:dict):
     intent=intent_data.get("intent")
@@ -17,7 +18,9 @@ def route_and_respond(message:str,intent_data:dict):
     {message}
    """
     response=client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-flash-lite-latest",
         contents=full_prompt
     )
-    return response.text
+    final_response = response.text
+    log_route(intent_data, message, final_response)
+    return final_response
