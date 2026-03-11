@@ -15,33 +15,37 @@ The service is built using **Python, FastAPI, and Docker**, and uses **Google Ge
 
 The system follows a **two-stage LLM pipeline**:
 
-1. **Intent Classification**
-2. **Expert Response Generation**
+1. **Intent Classification** — A lightweight LLM call detects the user's intent.
+2. **Expert Response Generation** — The classified intent selects a specialized persona prompt for a second, detailed LLM call.
 
-```
-User Message
-     │
-     ▼
-Intent Classifier (Gemini Flash)
-     │
-     ▼
-Intent Label
-(code / data / writing / career / unclear)
-     │
-     ▼
-Router
-     │
-     ▼
-Expert Persona Prompt
-     │
-     ▼
-Gemini Generation
-     │
-     ▼
-Final Response
-     │
-     ▼
-JSONL Logging
+```mermaid
+flowchart TD
+    A[👤 User Message] --> B{🔍 Intent Classifier\nGemini Flash}
+    B --> C{Intent Label}
+    C -->|code| D[🧑‍💻 Code Expert]
+    C -->|data| E[📊 Data Analyst]
+    C -->|writing| F[✍️ Writing Coach]
+    C -->|career| G[💼 Career Advisor]
+    C -->|unclear| H[❓ Ask Clarifying Question]
+    D --> I[🤖 Gemini Generation]
+    E --> I
+    F --> I
+    G --> I
+    H --> J[📨 Final Response]
+    I --> J
+    J --> K[📝 JSONL Logging]
+
+    style A fill:#4A90D9,stroke:#2E6BA4,color:#fff
+    style B fill:#F5A623,stroke:#D4891A,color:#fff
+    style C fill:#F5A623,stroke:#D4891A,color:#fff
+    style D fill:#7B68EE,stroke:#5A4FCF,color:#fff
+    style E fill:#7B68EE,stroke:#5A4FCF,color:#fff
+    style F fill:#7B68EE,stroke:#5A4FCF,color:#fff
+    style G fill:#7B68EE,stroke:#5A4FCF,color:#fff
+    style H fill:#E74C3C,stroke:#C0392B,color:#fff
+    style I fill:#2ECC71,stroke:#27AE60,color:#fff
+    style J fill:#1ABC9C,stroke:#16A085,color:#fff
+    style K fill:#95A5A6,stroke:#7F8C8D,color:#fff
 ```
 
 ---
