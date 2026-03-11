@@ -3,9 +3,19 @@ from classifier import client
 from logger import log_route
 
 CONFIDENCE_THRESHOLD = 0.7
+VALID_INTENTS = {"code", "data", "writing", "career"}
 def route_and_respond(message:str,intent_data:dict):
     intent=intent_data.get("intent")
     confidence=intent_data.get("confidence")
+    if message.startswith("@"):
+        parts = message.split(" ", 1)
+        override_intent = parts[0][1:]
+
+        if override_intent in VALID_INTENTS:
+            intent = override_intent
+            message = parts[1] if len(parts) > 1 else ""
+
+
     if confidence is None or confidence < CONFIDENCE_THRESHOLD:
         intent = "unclear"
     if intent == "unclear":
