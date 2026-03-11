@@ -1,5 +1,5 @@
 import json
-
+from datetime import datetime
 
 def log_route(intent_data, user_message, final_response):
     """
@@ -7,6 +7,7 @@ def log_route(intent_data, user_message, final_response):
     """
 
     log_entry = {
+        "timestamp": datetime.utcnow().isoformat(),
         "intent": intent_data.get("intent"),
         "confidence": intent_data.get("confidence"),
         "user_message": user_message,
