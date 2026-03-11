@@ -2,9 +2,12 @@ from prompts import PROMPTS
 from classifier import client
 from logger import log_route
 
+CONFIDENCE_THRESHOLD = 0.7
 def route_and_respond(message:str,intent_data:dict):
     intent=intent_data.get("intent")
     confidence=intent_data.get("confidence")
+    if confidence is None or confidence < CONFIDENCE_THRESHOLD:
+        intent = "unclear"
     if intent == "unclear":
         return (
             "I'm not sure what kind of help you're looking for. "
