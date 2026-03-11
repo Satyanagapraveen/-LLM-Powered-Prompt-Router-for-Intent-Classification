@@ -48,15 +48,15 @@ JSONL Logging
 
 ## Features
 
-* Intent-based prompt routing
-* Four specialized AI personas
-* Structured JSON responses
-* Confidence-based routing
-* Manual intent override
-* Request logging
-* FastAPI REST service
-* Dockerized deployment
-* Swagger API documentation
+- Intent-based prompt routing
+- Four specialized AI personas
+- Structured JSON responses
+- Confidence-based routing
+- Manual intent override
+- Request logging
+- FastAPI REST service
+- Dockerized deployment
+- Swagger API documentation
 
 ---
 
@@ -195,6 +195,22 @@ curl -X POST "http://localhost:8000/chat" \
 
 ---
 
+## Running Tests
+
+The project includes unit tests using Python's `unittest` module with mocked LLM calls:
+
+```
+python -m pytest test_prompts.py test_classifier.py test_classifier_intent.py test_router.py -v
+```
+
+Or run all tests at once:
+
+```
+python -m pytest -v
+```
+
+---
+
 ## Project Structure
 
 ```
@@ -205,34 +221,43 @@ ai_router/
 ├── router.py
 ├── prompts.py
 ├── logger.py
+├── main.py
+│
+├── test_prompts.py
+├── test_classifier.py
+├── test_classifier_intent.py
+├── test_router.py
 │
 ├── route_log.jsonl
 ├── .env
+├── .env.example
+├── .gitignore
 │
 ├── Dockerfile
 ├── docker-compose.yml
-└── requirements.txt
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
 ## Tech Stack
 
-* Python
-* FastAPI
-* Google Gemini API
-* Docker
-* JSONL Logging
+- Python
+- FastAPI
+- Google Gemini API
+- Docker
+- JSONL Logging
 
 ---
 
 ## Future Improvements
 
-* Rate limiting
-* Request caching
-* Multi-intent detection
-* Background task queue
-* Monitoring dashboard
+- Rate limiting
+- Request caching
+- Multi-intent detection
+- Background task queue
+- Monitoring dashboard
 
 ---
 

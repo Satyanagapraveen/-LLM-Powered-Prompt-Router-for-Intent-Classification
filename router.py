@@ -13,18 +13,21 @@ def route_and_respond(message:str,intent_data:dict):
 
         if override_intent in VALID_INTENTS:
             intent = override_intent
+            intent_data = {"intent": intent, "confidence": 1.0}
             message = parts[1] if len(parts) > 1 else ""
 
 
     if confidence is None or confidence < CONFIDENCE_THRESHOLD:
         intent = "unclear"
     if intent == "unclear":
-        return (
+        final_response = (
             "I'm not sure what kind of help you're looking for. "
             "Are you asking about coding, data analysis, writing improvement, "
             "or career advice?"
         )
-    system_prompt=PROMPTS.get("intent")
+        log_route(intent_data, message, final_response)
+        return final_response
+    system_prompt=PROMPTS.get(intent)
     full_prompt=f"""
     {system_prompt}
     user message:

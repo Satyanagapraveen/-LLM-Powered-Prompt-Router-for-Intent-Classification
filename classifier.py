@@ -51,6 +51,6 @@ def classify_intent(message:str):
         return result
     except Exception:
         return{
-            "intent":"Unclear",
-            "confidence":"0.0"
+            "intent":"unclear",
+            "confidence":0.0
         }
