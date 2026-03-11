@@ -13,7 +13,8 @@ def route_and_respond(message:str,intent_data:dict):
 
         if override_intent in VALID_INTENTS:
             intent = override_intent
-            intent_data = {"intent": intent, "confidence": 1.0}
+            confidence = 1.0
+            intent_data = {"intent": intent, "confidence": confidence}
             message = parts[1] if len(parts) > 1 else ""
 
 
