@@ -1,3 +1,0 @@
-import classifier
-
-print("Success!")
