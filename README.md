@@ -147,7 +147,7 @@ This enables monitoring, debugging, and analytics.
 ### 1. Clone the Repository
 
 ```
-git clone <repo-url>
+git clone https://github.com/Satyanagapraveen/-LLM-Powered-Prompt-Router-for-Intent-Classification
 cd ai_router
 ```
 
