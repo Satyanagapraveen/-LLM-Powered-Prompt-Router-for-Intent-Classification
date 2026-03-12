@@ -41,7 +41,7 @@ def classify_intent(message:str):
     {message}
    """
     response=client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-flash-lite-latest",
         contents=prompt
     )
     raw_text=response.text.strip()
