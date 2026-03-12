@@ -35,7 +35,7 @@ def route_and_respond(message:str,intent_data:dict):
     {message}
    """
     response=client.models.generate_content(
-        model="gemini-flash-lite-latest",
+        model="gemini-2.5-flash",
         contents=full_prompt
     )
     final_response = response.text
